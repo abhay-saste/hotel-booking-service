@@ -10,19 +10,9 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Room {
-    public Room() {
-    }
-
-    public Room(Long id, String type, double price, int capacity, boolean available, Hotel hotel) {
-        this.id = id;
-        this.type = type;
-        this.price = price;
-        this.capacity = capacity;
-        this.available = available;
-        this.hotel = hotel;
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

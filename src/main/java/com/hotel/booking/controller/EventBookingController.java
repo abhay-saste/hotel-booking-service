@@ -18,14 +18,13 @@ public class EventBookingController {
     @Autowired
     private BookingService bookingService;
 
-    @PostMapping("/bookings/events")
-    public ResponseEntity<BookingResponse> bookEvent(@PathVariable Long hotelId, @Valid @RequestBody EventBookingRequest request) {
-        if (!hotelId.equals(request.hotelId())) { throw new BookingValidationException("Path hotelId and request hotelId do not match."); }
-        BookingResponse response = bookingService.processBooking(request);
+    @PostMapping()
+    public ResponseEntity<BookingResponse> bookEvent(@Valid @RequestBody EventBookingRequest request) {
+         BookingResponse response = bookingService.processBooking(request);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @GetMapping("/bookings/events/{bookingId}")
+    @GetMapping("/{hotelId}/{bookingId}")
     public ResponseEntity<BookingDetailsResponse> getEventBooking(@PathVariable Long hotelId, @PathVariable Long bookingId) {
         return ResponseEntity.ok(bookingService.findBookingById(bookingId, "EVENT"));
     }
